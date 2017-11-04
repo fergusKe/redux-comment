@@ -1,8 +1,8 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+let path = require('path');
+let webpack = require('webpack');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 // var nodeModulesPath = path.resolve(__dirname, 'node_modules')
 // console.log(process.env.NODE_ENV)
@@ -12,24 +12,24 @@ module.exports = {
         app: path.resolve(__dirname, 'app/index.jsx'),
         // 将 第三方依赖 单独打包
         vendor: [
-          'react', 
-          'react-dom', 
-          'react-redux', 
+          'react',
+          'react-dom',
+          'react-redux',
           'react-router',
           'react-router-dom',
-          'redux', 
-          'es6-promise', 
+          'redux',
+          'es6-promise',
           'whatwg-fetch'
         ]
     },
     output: {
-        path: __dirname + "/build",
+        path: `${__dirname  }/build`,
         filename: "[name].[chunkhash:8].js",
         publicPath: '/'
     },
 
-    resolve:{
-        extensions:['.js','.jsx']
+    resolve: {
+        extensions: ['.js', '.jsx']
     },
 
     module: {
@@ -75,26 +75,26 @@ module.exports = {
 
         // html 模板插件
         new HtmlWebpackPlugin({
-            template: __dirname + '/app/index.tmpl.html'
+            template: `${__dirname  }/app/index.tmpl.html`
         }),
 
         // 定义为生产环境，编译 React 时压缩到最小
         new webpack.DefinePlugin({
-          'process.env':{
-            'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+          'process.env': {
+            NODE_ENV: JSON.stringify(process.env.NODE_ENV)
           }
         }),
-        
+
         new webpack.optimize.UglifyJsPlugin({
             compress: {
-              //supresses warnings, usually from module minification
+              // supresses warnings, usually from module minification
               warnings: false
             }
         }),
 
         // 分离CSS和JS文件
-        new ExtractTextPlugin('[name].[chunkhash:8].css'), 
-        
+        new ExtractTextPlugin('[name].[chunkhash:8].css'),
+
         // 提供公共代码
         new webpack.optimize.CommonsChunkPlugin({
           name: 'vendor',
@@ -106,4 +106,4 @@ module.exports = {
           __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
         })
     ]
-}
+};

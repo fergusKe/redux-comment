@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --open",
+    "start": "NODE_ENV=dev webpack-dev-server --hot --open",
     "mock": "node --harmony ./mock/server.js",
     "build": "rm -rf ./build && NODE_ENV=production webpack -p --progress --config webpack.production.config.js"
   },

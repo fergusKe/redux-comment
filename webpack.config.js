@@ -1,8 +1,8 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+let path = require('path');
+let webpack = require('webpack');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 // var nodeModulesPath = path.resolve(__dirname, 'node_modules')
 // console.log(process.env.NODE_ENV)
@@ -10,12 +10,12 @@ var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 module.exports = {
     entry: path.resolve(__dirname, 'app/index.jsx'),
     output: {
-        path: __dirname + "/build",
+        path: `${__dirname  }/build`,
         filename: "bundle.js"
     },
 
-    resolve:{
-        extensions:['.js','.jsx']
+    resolve: {
+        extensions: ['.js', '.jsx']
     },
 
     module: {
@@ -33,11 +33,11 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 use: [
                     'style-loader',
-                    { 
-                        loader: 'css-loader', 
-                        options: { 
-                            importLoaders: 1 
-                        } 
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
                     },
                     'postcss-loader',
                     'less-loader'
@@ -59,7 +59,7 @@ module.exports = {
     plugins: [
         // html 模板插件
         new HtmlWebpackPlugin({
-            template: __dirname + '/app/index.tmpl.html'
+            template: `${__dirname  }/app/index.tmpl.html`
         }),
 
         // 热加载插件
@@ -85,9 +85,9 @@ module.exports = {
             secure: false
           }
         },
-        contentBase: "./public", //本地服务器所加载的页面所在的目录
-        historyApiFallback: true, //不跳转
-        inline: true, //实时刷新
-        hot: true  // 使用热加载插件 HotModuleReplacementPlugin
+        contentBase: "./public", // 本地服务器所加载的页面所在的目录
+        historyApiFallback: true, // 不跳转
+        inline: true, // 实时刷新
+        hot: true // 使用热加载插件 HotModuleReplacementPlugin
     }
-}
+};
